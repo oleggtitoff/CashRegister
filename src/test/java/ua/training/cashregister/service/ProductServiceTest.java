@@ -31,18 +31,21 @@ public class ProductServiceTest {
         products = ProductsDTO.builder()
                 .products(Arrays.asList(
                         Product.builder()
+                                .id(1L)
                                 .name("Potato")
                                 .price(BigDecimal.valueOf(4.59))
                                 .productType(ProductType.BULK)
                                 .totalMass(BigDecimal.valueOf(643.5))
                                 .build(),
                         Product.builder()
+                                .id(2L)
                                 .name("Carrot")
                                 .price(BigDecimal.valueOf(6.24))
                                 .productType(ProductType.BULK)
                                 .totalMass(BigDecimal.valueOf(48.87))
                                 .build(),
                         Product.builder()
+                                .id(3L)
                                 .name("Bread")
                                 .price(BigDecimal.valueOf(11.62))
                                 .productType(ProductType.PIECE)
@@ -53,14 +56,14 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void saveNewProductTest() {
+    public void testSaveNewProduct() {
         productService.saveNewProduct(products.getProducts().get(0));
 
         verify(productRepository, times(1)).save(products.getProducts().get(0));
     }
 
     @Test
-    public void getAllProducts() {
+    public void testGetAllProducts() {
         when(productRepository.findAll()).thenReturn(products.getProducts());
 
         Assert.assertEquals(3, productService.getAllProducts().getProducts().size());
