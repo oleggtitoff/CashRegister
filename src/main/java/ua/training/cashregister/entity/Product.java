@@ -5,9 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @ToString
 
@@ -29,9 +32,16 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private ProductType productType;
 
+    @Builder.Default
     @Column(name = "total_quantity")
-    private BigInteger totalQuantity;
+    private BigInteger totalQuantity = BigInteger.ZERO;
 
+    @Builder.Default
     @Column(name = "total_mass")
-    private BigDecimal totalMass;
+    private BigDecimal totalMass = BigDecimal.ZERO;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<ProductInCheck> productsInChecks = new ArrayList<>();
 }
