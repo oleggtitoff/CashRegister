@@ -23,6 +23,9 @@ public class ProductInCheck {
     @ManyToOne
     private Product product;
 
+    @ManyToOne
+    private Check check;
+
     @Builder.Default
     @Column(name = "quantity")
     private BigInteger quantity = BigInteger.ZERO;
