@@ -87,4 +87,20 @@ public class ProductServiceTest {
     }
 
     //TODO: add testFindProductByIdIfNotExist
+    //TODO: add testFindProductByNameIfNotExist
+
+    @Test
+    public void testFindProductByName() {
+        int index = 2;
+        String name = products.getProducts().get(index).getName();
+
+        when(productRepository.findByName(name))
+                .thenReturn(Optional.of(products.getProducts().get(index)));
+
+        Product product = productService.findProductByName(name);
+
+        Assert.assertEquals(products.getProducts().get(index).getId(), product.getId());
+        Assert.assertEquals(products.getProducts().get(index).getName(), product.getName());
+        verify(productRepository, times(1)).findByName(name);
+    }
 }

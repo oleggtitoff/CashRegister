@@ -35,4 +35,9 @@ public class ProductService {
         //TODO: throw exception if empty
         return productRepository.findById(id).get();
     }
+
+    public Product findProductByName(String name) {
+        //TODO: throw exception if empty
+        return productRepository.findByName(name).get();
+    }
 }
