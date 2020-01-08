@@ -30,4 +30,9 @@ public class ProductService {
         //TODO: checking for an empty products list
         return new ProductsDTO(productRepository.findAll());
     }
+
+    public Product findProductById(Long id) {
+        //TODO: throw exception if empty
+        return productRepository.findById(id).get();
+    }
 }

@@ -15,6 +15,7 @@ import ua.training.cashregister.repository.ProductRepository;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
@@ -69,4 +70,21 @@ public class ProductServiceTest {
         Assert.assertEquals(3, productService.getAllProducts().getProducts().size());
         verify(productRepository, times(1)).findAll();
     }
+
+    @Test
+    public void testFindProductById() {
+        int index = 2;
+        Long id = products.getProducts().get(index).getId();
+
+        when(productRepository.findById(id))
+                .thenReturn(Optional.of(products.getProducts().get(index)));
+
+        Product product = productService.findProductById(id);
+
+        Assert.assertEquals(products.getProducts().get(index).getId(), product.getId());
+        Assert.assertEquals(products.getProducts().get(index).getName(), product.getName());
+        verify(productRepository, times(1)).findById(id);
+    }
+
+    //TODO: add testFindProductByIdIfNotExist
 }
