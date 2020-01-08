@@ -5,7 +5,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import ua.training.cashregister.entity.ProductInCheck;
 import ua.training.cashregister.repository.ProductInCheckRepository;
+
+import java.math.BigInteger;
+
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductInCheckServiceTest {
@@ -15,7 +20,14 @@ public class ProductInCheckServiceTest {
     ProductInCheckService productInCheckService;
 
     @Test
-    public void testAddNewProductInCheck() {
-        //TODO: implement test
+    public void testSaveNewProductInCheck() {
+        ProductInCheck newProduct = ProductInCheck.builder()
+                .id(1L)
+                .quantity(BigInteger.valueOf(5))
+                .build();
+
+        productInCheckService.saveNewProductInCheck(newProduct);
+
+        verify(productInCheckRepository, times(1)).save(newProduct);
     }
 }

@@ -22,7 +22,7 @@ public class ProductService {
             productRepository.save(product);
         } catch (Exception ex) {
             //TODO: exception to endpoint
-            log.warn("{Product with this name is already exists!}");
+            log.warn("{Product is already exists!}");
         }
     }
 
