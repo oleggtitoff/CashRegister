@@ -63,6 +63,8 @@ public class ProductServiceTest {
         verify(productRepository, times(1)).save(products.getProducts().get(0));
     }
 
+    //TODO: add testSaveNewProductIfAlreadyExist
+
     @Test
     public void testGetAllProducts() {
         when(productRepository.findAll()).thenReturn(products.getProducts());
