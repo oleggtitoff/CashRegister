@@ -44,4 +44,9 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<ProductInCheck> productsInChecks = new ArrayList<>();
+
+    public void addProductInCheck(ProductInCheck productInCheck) {
+        productInCheck.setProduct(this);
+        productsInChecks.add(productInCheck);
+    }
 }
