@@ -62,7 +62,8 @@ public class ProductInCheckServiceTest {
     public void testSaveNewProductInCheck() {
         productInCheckService.saveNewProductInCheck(productsInCheck.getProductsInCheck().get(0));
 
-        verify(productInCheckRepository, times(1)).save(productsInCheck.getProductsInCheck().get(0));
+        verify(productInCheckRepository, times(1))
+                .save(productsInCheck.getProductsInCheck().get(0));
     }
 
     @Test
@@ -79,4 +80,15 @@ public class ProductInCheckServiceTest {
         Assert.assertEquals(productsInCheck.getProductsInCheck().get(1).getId(),
                 products.getProductsInCheck().get(1).getId());
     }
+
+    @Test
+    public void testDeleteProductInCheck() {
+        productInCheckService.saveNewProductInCheck(productsInCheck.getProductsInCheck().get(0));
+        productInCheckService.deleteProductInCheck(productsInCheck.getProductsInCheck().get(0));
+
+        verify(productInCheckRepository, times(1))
+                .delete(productsInCheck.getProductsInCheck().get(0));
+    }
+
+    //TODO: testDeleteProductInCheckNotExists
 }

@@ -32,5 +32,12 @@ public class ProductInCheckService {
         return new ProductsInCheckDTO(productInCheckRepository.findByCheck(check));
     }
 
-    //TODO: deleteProductInCheck
+    public void deleteProductInCheck(ProductInCheck productInCheck) {
+        try {
+            productInCheckRepository.delete(productInCheck);
+        } catch (Exception ex) {
+            //TODO: exception to endpoint
+            log.warn("{ProductInCheck cannot be deleted!}");
+        }
+    }
 }
