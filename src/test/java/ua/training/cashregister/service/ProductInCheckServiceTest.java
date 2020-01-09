@@ -29,26 +29,16 @@ public class ProductInCheckServiceTest {
     ProductsInCheckDTO productsInCheck;
 
     @Before
-    public void initCheck() {
-        check = Check.builder()
-                .id(1L)
-                .created(LocalDateTime.MIN)
-                .build();
-    }
-
-    @Before
-    public void initProductsInCheck() {
+    public void initCheckAndProductsInCheck() {
         productsInCheck = ProductsInCheckDTO.builder()
                 .productsInCheck(Arrays.asList(
                         ProductInCheck.builder()
                                 .id(1L)
                                 .quantity(BigInteger.valueOf(5))
-                                .check(check)
                                 .build(),
                         ProductInCheck.builder()
                                 .id(2L)
                                 .mass(BigDecimal.valueOf(3.643))
-                                .check(check)
                                 .build(),
                         ProductInCheck.builder()
                                 .id(3L)
@@ -56,6 +46,14 @@ public class ProductInCheckServiceTest {
                                 .build()
                         )
                 ).build();
+
+        check = Check.builder()
+                .id(1L)
+                .created(LocalDateTime.MIN)
+                .build();
+
+        check.addProductInCheck(productsInCheck.getProductsInCheck().get(0));
+        check.addProductInCheck(productsInCheck.getProductsInCheck().get(1));
     }
 
     @Test
@@ -83,7 +81,6 @@ public class ProductInCheckServiceTest {
 
     @Test
     public void testDeleteProductInCheck() {
-        productInCheckService.saveNewProductInCheck(productsInCheck.getProductsInCheck().get(0));
         productInCheckService.deleteProductInCheck(productsInCheck.getProductsInCheck().get(0));
 
         verify(productInCheckRepository, times(1))

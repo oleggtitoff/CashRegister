@@ -10,7 +10,6 @@ import java.math.BigInteger;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
 
 @Entity
 @Table(name = "products_in_checks")
@@ -33,4 +32,16 @@ public class ProductInCheck {
     @Builder.Default
     @Column(name = "mass")
     private BigDecimal mass = BigDecimal.ZERO;
+
+    //TODO: replace null checking
+    @Override
+    public String toString() {
+        return "ProductInCheck{" +
+                "id=" + id +
+                ", product=" + (product != null ? product.getId() : null) +
+                ", checkId=" + (check != null ? check.getId() : null) +
+                ", quantity=" + quantity +
+                ", mass=" + mass +
+                '}';
+    }
 }
