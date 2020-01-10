@@ -9,11 +9,11 @@ import ua.training.cashregister.repository.CheckRepository;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class CheckServiceTest {
+public class CheckServiceImplTest {
     @Mock
     CheckRepository checkRepository;
     @InjectMocks
-    CheckService checkService;
+    CheckServiceImpl checkServiceImpl;
 
     @Test
     public void testAddNewCheck() {
