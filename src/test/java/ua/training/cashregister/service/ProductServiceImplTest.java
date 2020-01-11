@@ -20,11 +20,11 @@ import java.util.Optional;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProductServiceTest {
+public class ProductServiceImplTest {
     @Mock
     ProductRepository productRepository;
     @InjectMocks
-    ProductService productService;
+    ProductServiceImpl productServiceImpl;
     ProductsDTO products;
 
     @Before
@@ -58,7 +58,7 @@ public class ProductServiceTest {
 
     @Test
     public void testSaveNewProduct() {
-        productService.saveNewProduct(products.getProducts().get(0));
+        productServiceImpl.saveNewProduct(products.getProducts().get(0));
 
         verify(productRepository, times(1)).save(products.getProducts().get(0));
     }
@@ -69,7 +69,7 @@ public class ProductServiceTest {
     public void testGetAllProducts() {
         when(productRepository.findAll()).thenReturn(products.getProducts());
 
-        Assert.assertEquals(3, productService.getAllProducts().getProducts().size());
+        Assert.assertEquals(3, productServiceImpl.getAllProducts().getProducts().size());
         verify(productRepository, times(1)).findAll();
     }
 
@@ -81,7 +81,7 @@ public class ProductServiceTest {
         when(productRepository.findById(id))
                 .thenReturn(Optional.of(products.getProducts().get(index)));
 
-        Product product = productService.findProductById(id);
+        Product product = productServiceImpl.findProductById(id);
 
         Assert.assertEquals(products.getProducts().get(index).getId(), product.getId());
         Assert.assertEquals(products.getProducts().get(index).getName(), product.getName());
@@ -99,7 +99,7 @@ public class ProductServiceTest {
         when(productRepository.findByName(name))
                 .thenReturn(Optional.of(products.getProducts().get(index)));
 
-        Product product = productService.findProductByName(name);
+        Product product = productServiceImpl.findProductByName(name);
 
         Assert.assertEquals(products.getProducts().get(index).getId(), product.getId());
         Assert.assertEquals(products.getProducts().get(index).getName(), product.getName());
