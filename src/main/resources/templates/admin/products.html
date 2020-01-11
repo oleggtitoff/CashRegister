@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Cash Register</title>
 </head>
@@ -9,6 +9,34 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header">Admin products page</h1>
+
+            <div>
+                <table th:object="${products}">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Type</th>
+                        <th>Total quantity</th>
+                        <th>Total mass</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${products.isEmpty()}">
+                        <td>No products yet</td>
+                    </tr>
+                    <tr th:each="product : ${products}">
+                        <td><span th:text="${product.id}">id</span></td>
+                        <td><span th:text="${product.name}">name</span></td>
+                        <td><span th:text="${#numbers.formatDecimal(product.price,0,2,'COMMA')}">price</span></td>
+                        <td><span th:text="${product.productType}">type</span></td>
+                        <td><span th:text="${#numbers.formatInteger(product.totalQuantity,0)}">quantity</span></td>
+                        <td><span th:text="${#numbers.formatDecimal(product.totalMass,0,2,'COMMA')}">mass</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
