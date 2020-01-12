@@ -32,8 +32,15 @@ public class User implements UserDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Role> authorities;
 
-    private boolean accountNonExpired;
-    private boolean accountNonLocked;
-    private boolean credentialsNonExpired;
-    private boolean enabled;
+    @Builder.Default
+    private boolean accountNonExpired = false;
+
+    @Builder.Default
+    private boolean accountNonLocked = false;
+
+    @Builder.Default
+    private boolean credentialsNonExpired = false;
+
+    @Builder.Default
+    private boolean enabled = true;
 }
