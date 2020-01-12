@@ -33,13 +33,13 @@ public class User implements UserDetails {
     private List<Role> authorities;
 
     @Builder.Default
-    private boolean accountNonExpired = false;
+    private boolean accountNonExpired = true;
 
     @Builder.Default
-    private boolean accountNonLocked = false;
+    private boolean accountNonLocked = true;
 
     @Builder.Default
-    private boolean credentialsNonExpired = false;
+    private boolean credentialsNonExpired = true;
 
     @Builder.Default
     private boolean enabled = true;
