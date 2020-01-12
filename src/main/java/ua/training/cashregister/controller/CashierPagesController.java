@@ -11,4 +11,9 @@ public class CashierPagesController {
     public String getIndexPage() {
         return "cashier/index";
     }
+
+    @GetMapping("/new-check")
+    public String getNewCheckPage() {
+        return "cashier/new-check";
+    }
 }
