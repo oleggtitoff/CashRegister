@@ -32,10 +32,14 @@
                         <td th:text="${#numbers.formatDecimal(product.price,0,2,'COMMA')}">price
                         </td>
                         <td th:text="${product.productType}">type</td>
-                        <td th:text="${#numbers.formatInteger(product.totalQuantity,0)}">quantity
+                        <td th:if="${product.productType == product.productType.PIECE}"
+                            th:text="${#numbers.formatInteger(product.totalQuantity,0)}">quantity
                         </td>
-                        <td th:text="${#numbers.formatDecimal(product.totalMass,0,2,'COMMA')}">mass
+                        <td th:unless="${product.productType == product.productType.PIECE}">-</td>
+                        <td th:if="${product.productType == product.productType.BULK}"
+                            th:text="${#numbers.formatDecimal(product.totalMass,0,3,'COMMA')}">mass
                         </td>
+                        <td th:unless="${product.productType == product.productType.BULK}">-</td>
                     </tr>
                     </tbody>
                 </table>

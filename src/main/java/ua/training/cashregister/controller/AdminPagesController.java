@@ -3,9 +3,15 @@ package ua.training.cashregister.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ua.training.cashregister.entity.Product;
 import ua.training.cashregister.service.ProductService;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin")
@@ -29,7 +35,17 @@ public class AdminPagesController {
     }
 
     @GetMapping("/new-product")
-    public String getNewProductPage() {
+    public String getNewProductPage(Model model) {
+        model.addAttribute("product", new Product());
+        return "admin/new-product";
+    }
+
+    @PostMapping("/new-product")
+    public String addNewProduct(@Valid @ModelAttribute("product") Product product,
+                                BindingResult bindingResult,
+                                Model model) {
+        //TODO: check and add product
+        productService.saveNewProduct(product);
         return "admin/new-product";
     }
 

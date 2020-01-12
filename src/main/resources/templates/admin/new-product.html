@@ -9,6 +9,78 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header">Admin new-product page</h1>
+
+            <form action="#" th:action="@{/admin/new-product}" th:object="${product}" method="post">
+                <div class="form-group">
+                    <label for="name">Product name</label>
+                    <input class="form-control" type="text" id="name" onclick="this.select()"
+                           th:field="*{name}"
+                           th:placeholder="name" required/>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input class="form-control" type="text" id="price" onclick="this.select()"
+                           th:field="*{price}"
+                           th:placeholder="price" required/>
+                </div>
+                <div>
+                    <label for="type-list">Product type</label>
+                    <ul class="list-group list-group-flush" id="type-list">
+                        <li class="list-group-item">
+                            <input type="radio" id="radioQuantity" onclick="handleClick()"
+                                   th:field="*{productType}" th:value="PIECE" required/>
+                            <label for="radioQuantity" th:text="Piece">Label 1</label>
+                        </li>
+                        <li class="list-group-item">
+                            <input type="radio" id="radioMass" onclick="handleClick()"
+                                   th:field="*{productType}" th:value="BULK"/>
+                            <label for="radioMass" th:text="Bulk">Label 2</label>
+                        </li>
+                    </ul>
+                </div>
+                <div id="quantity-input" class="form-group">
+                    <label for="total-quantity">Total quantity</label>
+                    <input class="form-control" type="text" id="total-quantity"
+                           onclick="this.select()" th:field="*{totalQuantity}"
+                           th:placeholder="total-quantity" required/>
+                </div>
+                <div id="mass-input" class="form-group">
+                    <label for="total-mass">Total mass</label>
+                    <input class="form-control" type="text" id="total-mass" onclick="this.select()"
+                           th:field="*{totalMass}" th:placeholder="total-mass" required/>
+                </div>
+
+                <div>
+                    <br>
+                    <button class="btn btn-default" type="submit">Submit</button>
+                </div>
+
+                <script>
+                    let radioQuantity = document.getElementById("radioQuantity");
+                    let radioMass = document.getElementById("radioMass");
+                    let quantityInput = document.getElementById("quantity-input");
+                    let massInput = document.getElementById("mass-input");
+                    let totalQuantity = document.getElementById("total-quantity");
+                    let totalMass = document.getElementById("total-mass");
+
+                    handleClick();
+
+                    function handleClick() {
+                        if (radioQuantity.checked) {
+                            quantityInput.style.display = "initial";
+                            massInput.style.display = "none";
+                            totalMass.value = totalMass.defaultValue;
+                        } else if (radioMass.checked) {
+                            massInput.style.display = "initial";
+                            quantityInput.style.display = "none";
+                            totalQuantity.value = totalQuantity.defaultValue;
+                        } else {
+                            quantityInput.style.display = "none";
+                            massInput.style.display = "none";
+                        }
+                    }
+                </script>
+            </form>
         </div>
     </div>
 </div>
