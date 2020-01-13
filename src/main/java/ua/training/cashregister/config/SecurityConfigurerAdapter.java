@@ -1,12 +1,12 @@
 package ua.training.cashregister.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+@Primary
 @Configuration
-@Order(1) //TODO: try to replace by @Primary
 public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
     public SecurityConfigurerAdapter() {
         super();
@@ -20,8 +20,24 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/login", "/logout")
+                .antMatchers("/", "/login", "/logout")
                 .permitAll();
+
+        httpSecurity
+                .authorizeRequests()
+                .antMatchers("/cashier/**")
+                .access("hasAuthority(T(ua.training.cashregister.entity.Role).CASHIER.getAuthority())");
+
+        httpSecurity
+                .authorizeRequests()
+                .antMatchers("/admin/**")
+                .access("hasAuthority(T(ua.training.cashregister.entity.Role).ADMIN.getAuthority())");
+
+        httpSecurity
+                .authorizeRequests()
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/access-denied");
 
         httpSecurity
                 .authorizeRequests()
@@ -29,7 +45,7 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .failureUrl("/login?error")
-                .defaultSuccessUrl("/cashier/index", true)
+                .defaultSuccessUrl("/default-success", true)
                 .and()
                 .logout()
                 .logoutUrl("/logout")
