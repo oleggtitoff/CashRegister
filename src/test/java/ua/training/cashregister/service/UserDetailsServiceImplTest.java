@@ -20,10 +20,22 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
+//    **For user appending**
+//
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
+
 @RunWith(MockitoJUnitRunner.class)
 public class UserDetailsServiceImplTest {
     @Mock
+//    **For user appending**
+//    @Autowired
+
     UserRepository userRepository;
+
+//    **For user appending**
+//    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @InjectMocks
     UserDetailsServiceImpl userDetailsService;
     User user;
@@ -39,6 +51,22 @@ public class UserDetailsServiceImplTest {
                 .authorities(Arrays.asList(Role.CASHIER, Role.ADMIN))
                 .build();
     }
+
+//    **For user appending**
+//
+//    @Test
+//    public void appendUser() {
+//        System.out.println("------------------------------------");
+//        try {
+//            userRepository.save(User.builder()
+//                    .username("c")
+//                    .password(passwordEncoder.encode("c"))
+//                    .authorities(Arrays.asList(Role.CASHIER))
+//                    .build());
+//        } catch (Exception ex) {
+//            System.out.println("Something wrong...");
+//        }
+//    }
 
     @Test
     public void testLoadUserByUsername() {

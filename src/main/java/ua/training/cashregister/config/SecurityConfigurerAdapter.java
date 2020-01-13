@@ -14,7 +14,25 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        //httpSecurity.
-        //TODO
+        httpSecurity
+                .csrf()
+                .disable();
+
+        httpSecurity
+                .authorizeRequests()
+                .antMatchers("/login", "/logout")
+                .permitAll();
+
+        httpSecurity
+                .authorizeRequests()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .failureUrl("/login?error")
+                .defaultSuccessUrl("/cashier/index", true)
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout");
     }
 }
