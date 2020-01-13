@@ -1,11 +1,11 @@
 package ua.training.cashregister.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpServletRequest;
+import ua.training.cashregister.entity.Role;
 
 @Controller
 public class LoginController {
@@ -20,8 +20,9 @@ public class LoginController {
     }
 
     @RequestMapping("/default-success")
-    public String getSuccessPage(HttpServletRequest request) {
-        if (request.isUserInRole("ROLE_ADMIN")) {
+    public String getSuccessPage() {
+        if (SecurityContextHolder.getContext().getAuthentication()
+                .getAuthorities().contains(Role.ADMIN)) {
             return "redirect:/admin/index";
         }
         return "redirect:/cashier/index";
