@@ -15,27 +15,16 @@ import ua.training.cashregister.entity.Role;
 import ua.training.cashregister.entity.User;
 import ua.training.cashregister.repository.UserRepository;
 
-import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.mockito.Mockito.*;
-
-//    **For user appending**
-//
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserDetailsServiceImplTest {
     @Mock
-//    **For user appending**
-//    @Autowired
-
     UserRepository userRepository;
-
-//    **For user appending**
-//    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
     @InjectMocks
     UserDetailsServiceImpl userDetailsService;
     User user;
@@ -48,25 +37,13 @@ public class UserDetailsServiceImplTest {
         user = User.builder()
                 .username("John")
                 .password("pass")
-                .authorities(Arrays.asList(Role.CASHIER, Role.ADMIN))
+                .authorities(
+                        Stream
+                                .of(Role.CASHIER, Role.ADMIN)
+                                .collect(Collectors.toSet())
+                )
                 .build();
     }
-
-//    **For user appending**
-//
-//    @Test
-//    public void appendUser() {
-//        System.out.println("------------------------------------");
-//        try {
-//            userRepository.save(User.builder()
-//                    .username("c")
-//                    .password(passwordEncoder.encode("c"))
-//                    .authorities(Arrays.asList(Role.CASHIER))
-//                    .build());
-//        } catch (Exception ex) {
-//            System.out.println("Something wrong...");
-//        }
-//    }
 
     @Test
     public void testLoadUserByUsername() {
