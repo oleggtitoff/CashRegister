@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="fragments/head :: head"/>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default" style="margin-top: 45px">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">SignIn prompt</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div th:if="${logout}">
+                            <div class="alert alert-info" role="alert">Logged out.
+                            </div>
+                        </div>
+                        <div th:if="${error}">
+                            <div class="alert alert-danger" role="alert">Invalid
+                                credentials!
+                            </div>
+                        </div>
+
+                        <form method="post" th:action="@{/login}">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username"
+                                       name="username" th:placeholder="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password"
+                                       name="password" th:placeholder="password">
+                            </div>
+                            <button class="btn btn-default" type="submit">Submit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
