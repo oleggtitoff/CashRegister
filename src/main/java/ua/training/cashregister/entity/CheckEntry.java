@@ -13,7 +13,7 @@ import java.math.BigInteger;
 
 @Entity
 @Table(name = "products_in_checks")
-public class ProductInCheck {
+public class CheckEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", updatable = false, nullable = false)

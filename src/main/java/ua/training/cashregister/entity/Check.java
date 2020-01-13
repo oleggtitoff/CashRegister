@@ -33,10 +33,10 @@ public class Check {
     @Builder.Default
     @OneToMany(mappedBy = "check", cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<ProductInCheck> productsInCheck = new ArrayList<>();
+    private List<CheckEntry> checkEntries = new ArrayList<>();
 
-    public void addProductInCheck(ProductInCheck productInCheck) {
-        productInCheck.setCheck(this);
-        productsInCheck.add(productInCheck);
+    public void addCheckEntry(CheckEntry checkEntry) {
+        checkEntry.setCheck(this);
+        checkEntries.add(checkEntry);
     }
 }
