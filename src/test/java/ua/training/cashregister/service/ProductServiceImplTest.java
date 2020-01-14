@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import ua.training.cashregister.dto.ProductsDTO;
 import ua.training.cashregister.entity.Product;
 import ua.training.cashregister.entity.ProductType;
 import ua.training.cashregister.repository.ProductRepository;
@@ -15,6 +14,7 @@ import ua.training.cashregister.repository.ProductRepository;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -25,66 +25,64 @@ public class ProductServiceImplTest {
     ProductRepository productRepository;
     @InjectMocks
     ProductServiceImpl productServiceImpl;
-    ProductsDTO products;
+    List<Product> products;
 
     @Before
     public void initProducts() {
-        products = ProductsDTO.builder()
-                .products(Arrays.asList(
-                        Product.builder()
-                                .id(1L)
-                                .name("Potato")
-                                .price(BigDecimal.valueOf(4.59))
-                                .productType(ProductType.BULK)
-                                .totalMass(BigDecimal.valueOf(643.5))
-                                .build(),
-                        Product.builder()
-                                .id(2L)
-                                .name("Carrot")
-                                .price(BigDecimal.valueOf(6.24))
-                                .productType(ProductType.BULK)
-                                .totalMass(BigDecimal.valueOf(48.87))
-                                .build(),
-                        Product.builder()
-                                .id(3L)
-                                .name("Bread")
-                                .price(BigDecimal.valueOf(11.62))
-                                .productType(ProductType.PIECE)
-                                .totalQuantity(BigInteger.valueOf(43))
-                                .build()
-                        )
-                ).build();
+        products = Arrays.asList(
+                Product.builder()
+                        .id(1L)
+                        .name("Potato")
+                        .price(BigDecimal.valueOf(4.59))
+                        .productType(ProductType.BULK)
+                        .totalMass(BigDecimal.valueOf(643.5))
+                        .build(),
+                Product.builder()
+                        .id(2L)
+                        .name("Carrot")
+                        .price(BigDecimal.valueOf(6.24))
+                        .productType(ProductType.BULK)
+                        .totalMass(BigDecimal.valueOf(48.87))
+                        .build(),
+                Product.builder()
+                        .id(3L)
+                        .name("Bread")
+                        .price(BigDecimal.valueOf(11.62))
+                        .productType(ProductType.PIECE)
+                        .totalQuantity(BigInteger.valueOf(43))
+                        .build()
+        );
     }
 
     @Test
     public void testSaveNewProduct() {
-        productServiceImpl.saveNewProduct(products.getProducts().get(0));
+        productServiceImpl.saveNewProduct(products.get(0));
 
-        verify(productRepository, times(1)).save(products.getProducts().get(0));
+        verify(productRepository, times(1)).save(products.get(0));
     }
 
     //TODO: add testSaveNewProductIfAlreadyExist
 
     @Test
     public void testGetAllProducts() {
-        when(productRepository.findAll()).thenReturn(products.getProducts());
+        when(productRepository.findAll()).thenReturn(products);
 
-        Assert.assertEquals(3, productServiceImpl.getAllProducts().getProducts().size());
+        Assert.assertEquals(3, productServiceImpl.getAllProducts().size());
         verify(productRepository, times(1)).findAll();
     }
 
     @Test
     public void testFindProductById() {
         int index = 2;
-        Long id = products.getProducts().get(index).getId();
+        Long id = products.get(index).getId();
 
         when(productRepository.findById(id))
-                .thenReturn(Optional.of(products.getProducts().get(index)));
+                .thenReturn(Optional.of(products.get(index)));
 
         Product product = productServiceImpl.findProductById(id);
 
-        Assert.assertEquals(products.getProducts().get(index).getId(), product.getId());
-        Assert.assertEquals(products.getProducts().get(index).getName(), product.getName());
+        Assert.assertEquals(products.get(index).getId(), product.getId());
+        Assert.assertEquals(products.get(index).getName(), product.getName());
         verify(productRepository, times(1)).findById(id);
     }
 
@@ -94,15 +92,15 @@ public class ProductServiceImplTest {
     @Test
     public void testFindProductByName() {
         int index = 2;
-        String name = products.getProducts().get(index).getName();
+        String name = products.get(index).getName();
 
         when(productRepository.findByName(name))
-                .thenReturn(Optional.of(products.getProducts().get(index)));
+                .thenReturn(Optional.of(products.get(index)));
 
         Product product = productServiceImpl.findProductByName(name);
 
-        Assert.assertEquals(products.getProducts().get(index).getId(), product.getId());
-        Assert.assertEquals(products.getProducts().get(index).getName(), product.getName());
+        Assert.assertEquals(products.get(index).getId(), product.getId());
+        Assert.assertEquals(products.get(index).getName(), product.getName());
         verify(productRepository, times(1)).findByName(name);
     }
 }

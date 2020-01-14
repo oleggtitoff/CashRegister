@@ -30,7 +30,7 @@ public class AdminPagesController {
 
     @GetMapping("/products")
     public String getProductsPage(Model model) {
-        model.addAttribute("products", productService.getAllProducts().getProducts());
+        model.addAttribute("products", productService.getAllProducts());
         return "admin/products";
     }
 

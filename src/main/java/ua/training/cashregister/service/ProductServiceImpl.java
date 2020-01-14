@@ -3,9 +3,10 @@ package ua.training.cashregister.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.training.cashregister.dto.ProductsDTO;
 import ua.training.cashregister.entity.Product;
 import ua.training.cashregister.repository.ProductRepository;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -26,9 +27,9 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    public ProductsDTO getAllProducts() {
+    public List<Product> getAllProducts() {
         //TODO: checking for an empty products list
-        return new ProductsDTO(productRepository.findAll());
+        return productRepository.findAll();
     }
 
     public Product findProductById(Long id) {
