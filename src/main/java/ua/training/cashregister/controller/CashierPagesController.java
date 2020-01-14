@@ -13,6 +13,7 @@ import ua.training.cashregister.dto.CheckEntriesDTO;
 import ua.training.cashregister.dto.CheckEntryCreationDTO;
 import ua.training.cashregister.entity.CheckEntry;
 import ua.training.cashregister.entity.Product;
+import ua.training.cashregister.service.CheckService;
 import ua.training.cashregister.service.ProductService;
 
 import javax.validation.Valid;
@@ -21,11 +22,14 @@ import javax.validation.Valid;
 @RequestMapping("/cashier")
 public class CashierPagesController {
     ProductService productService;
+    CheckService checkService;
     CheckEntriesDTO checkEntriesDTO = new CheckEntriesDTO();
 
     @Autowired
-    public CashierPagesController(ProductService productService) {
+    public CashierPagesController(ProductService productService,
+                                  CheckService checkService) {
         this.productService = productService;
+        this.checkService = checkService;
     }
 
     @GetMapping({"/", "/index"})
@@ -67,8 +71,7 @@ public class CashierPagesController {
 
     @RequestMapping(value = "/new-check", params = {"submit"})
     public String saveCheck(@ModelAttribute("entries") CheckEntriesDTO checkEntriesDTO) {
-        //TODO: save check
-
+        checkService.saveNewCheck(checkEntriesDTO);
         checkEntriesDTO.getCheckEntries().clear();
         return "cashier/index";
     }

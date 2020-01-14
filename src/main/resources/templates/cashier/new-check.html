@@ -37,7 +37,7 @@
             </td>
             <td th:unless="${entry.product.productType == entry.product.productType.PIECE}">-</td>
             <td th:if="${entry.product.productType == entry.product.productType.BULK}"
-                th:text="${#numbers.formatDecimal(entry.mass,0,3,'COMMA')}">quantity
+                th:text="${#numbers.formatDecimal(entry.mass,1,3,'COMMA')}">quantity
             </td>
             <td th:unless="${entry.product.productType == entry.product.productType.BULK}">-</td>
         </tr>

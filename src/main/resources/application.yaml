@@ -4,6 +4,10 @@ server:
 spring:
   mandatory-file-encoding: UTF-8
 
+  messages:
+    basename: messages
+    fallback-to-system-locale: false
+
   datasource:
     url: jdbc:mysql://localhost:3306/cash_register?useLegacyDatetimeCode=false&amp&serverTimezone=UTC
     username: root

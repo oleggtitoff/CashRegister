@@ -12,7 +12,7 @@ import java.math.BigInteger;
 @Builder
 
 @Entity
-@Table(name = "products_in_checks")
+@Table(name = "check_entries")
 public class CheckEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -36,7 +36,7 @@ public class CheckEntry {
     //TODO: replace null checking
     @Override
     public String toString() {
-        return "ProductInCheck{" +
+        return "CheckEntry{" +
                 "id=" + id +
                 ", product=" + (product != null ? product.getId() : null) +
                 ", checkId=" + (check != null ? check.getId() : null) +
