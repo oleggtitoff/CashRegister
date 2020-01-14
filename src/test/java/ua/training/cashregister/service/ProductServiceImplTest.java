@@ -78,16 +78,16 @@ public class ProductServiceImplTest {
 
         when(productRepository.findById(Long.parseLong(searchById)))
                 .thenReturn(Optional.of(products.get(2)));
-//        when(productRepository.findByName(searchByName))
-//                .thenReturn(Optional.of(products.get(1)));
+        when(productRepository.findByName(searchByName))
+                .thenReturn(Optional.of(products.get(1)));
 
         Product resultById = productServiceImpl.findProductByIdOrName(searchById);
-        //Product resultByName = productServiceImpl.findProductByIdOrName(searchByName);
+        Product resultByName = productServiceImpl.findProductByIdOrName(searchByName);
 
         Assert.assertEquals(products.get(2).getId(), resultById.getId());
-        //Assert.assertEquals(products.get(1).getName(), resultByName.getName());
+        Assert.assertEquals(products.get(1).getName(), resultByName.getName());
         verify(productRepository, times(1)).findById(3L);
-        //verify(productRepository, times(2)).findByName(searchByName);
+        verify(productRepository, times(1)).findByName(searchByName);
     }
 
     @Test
