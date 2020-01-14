@@ -13,6 +13,48 @@
             <h1 class="page-header">User new-check page</h1>
         </div>
     </div>
+
+    <table class="table" th:object="${entries}">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Product id</th>
+            <th>Product name</th>
+            <th>Quantity</th>
+            <th>Mass</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="*{checkEntries.isEmpty()}">
+            <td>No products yet</td>
+        </tr>
+        <tr th:each="entry,entryStat : *{checkEntries}">
+            <td th:text="${entryStat.count}">1</td>
+            <td>id</td>
+            <td>name</td>
+            <td>quantity</td>
+            <td>mass</td>
+        </tr>
+        </tbody>
+    </table>
+    <h3 class="panel-title">Add product</h3>
+    <form th:action="@{/cashier/new-check}" th:object="${entry}"  method="post">
+        <div>
+            <label for="search">Product id or name</label>
+            <input class="form-control" type="text" id="search" th:field="*{searchBy}" placeholder="id or name"/>
+        </div>
+        <div>
+            <label for="number">Quantity or mass</label>
+            <input class="form-control" type="text" id="number" th:field="*{number}" placeholder="quantity or mass"/>
+        </div>
+        <div>
+            <button class="btn btn-default" type="submit" name="validate">Add product</button>
+        </div>
+        <br>
+        <div>
+            <button class="btn btn-default" type="submit" name="submit">Save check</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>

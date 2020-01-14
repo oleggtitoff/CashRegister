@@ -44,7 +44,7 @@ public class AdminPagesController {
     public String addNewProduct(@Valid @ModelAttribute("product") Product product,
                                 BindingResult bindingResult,
                                 Model model) {
-        //TODO: check and add product
+        //TODO: check product
         productService.saveNewProduct(product);
         return "admin/new-product";
     }

@@ -3,6 +3,7 @@ package ua.training.cashregister.dto;
 import lombok.*;
 import ua.training.cashregister.entity.CheckEntry;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -11,7 +12,8 @@ import java.util.List;
 @Builder
 @ToString
 public class CheckEntriesDTO {
-    private List<CheckEntry> checkEntries;
+    @Builder.Default
+    private List<CheckEntry> checkEntries = new ArrayList<>();
 
     public void addCheckEntry(CheckEntry checkEntry) {
         this.checkEntries.add(checkEntry);
