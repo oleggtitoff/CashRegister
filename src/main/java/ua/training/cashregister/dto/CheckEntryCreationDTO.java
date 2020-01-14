@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 public class CheckEntryCreationDTO {
     @NotBlank
     private String searchBy;
+
     @Positive(message = "Number must be positive")
     private BigDecimal number;
 }

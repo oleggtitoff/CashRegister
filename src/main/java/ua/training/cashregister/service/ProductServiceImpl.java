@@ -7,6 +7,7 @@ import ua.training.cashregister.entity.Product;
 import ua.training.cashregister.repository.ProductRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -30,6 +31,20 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAllProducts() {
         //TODO: checking for an empty products list
         return productRepository.findAll();
+    }
+
+    public Product findProductByIdOrName(String searchBy) {
+        long id = -1L;
+
+        try {
+            id = Long.parseLong(searchBy);
+        } catch (Exception ex) {
+            //TODO
+        }
+        //TODO: throw exception if not found
+        Optional<Product> found = productRepository.findById(id);
+
+        return found.orElseGet(() -> productRepository.findByName(searchBy).get());
     }
 
     public Product findProductById(Long id) {
