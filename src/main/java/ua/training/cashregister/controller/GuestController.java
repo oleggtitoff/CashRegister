@@ -9,9 +9,4 @@ public class GuestController {
     public String getStartPage() {
         return "index";
     }
-
-    @GetMapping("access-denied")
-    public String getAccessDeniedPage() {
-        return "access-denied";
-    }
 }

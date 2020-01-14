@@ -36,8 +36,7 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests()
                 .and()
-                .exceptionHandling()
-                .accessDeniedPage("/access-denied");
+                .exceptionHandling();
 
         httpSecurity
                 .authorizeRequests()
