@@ -3,6 +3,7 @@ package ua.training.cashregister.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.training.cashregister.ProductNotFoundException;
 import ua.training.cashregister.entity.Product;
 import ua.training.cashregister.repository.ProductRepository;
 
@@ -41,10 +42,11 @@ public class ProductServiceImpl implements ProductService {
         } catch (Exception ex) {
             //TODO
         }
-        //TODO: throw exception if not found
+
         Optional<Product> found = productRepository.findById(id);
 
-        return found.orElseGet(() -> productRepository.findByName(searchBy).get());
+        return found.orElseGet(() -> productRepository.findByName(searchBy)
+                .orElseThrow(() -> new ProductNotFoundException(searchBy)));
     }
 
     public Product findProductById(Long id) {

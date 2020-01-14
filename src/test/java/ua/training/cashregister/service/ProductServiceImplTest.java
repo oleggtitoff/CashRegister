@@ -2,11 +2,14 @@ package ua.training.cashregister.service;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import ua.training.cashregister.ProductNotFoundException;
 import ua.training.cashregister.entity.Product;
 import ua.training.cashregister.entity.ProductType;
 import ua.training.cashregister.repository.ProductRepository;
@@ -26,6 +29,9 @@ public class ProductServiceImplTest {
     @InjectMocks
     ProductServiceImpl productServiceImpl;
     List<Product> products;
+
+    @Rule
+    public final ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void initProducts() {
@@ -91,6 +97,18 @@ public class ProductServiceImplTest {
     }
 
     @Test
+    public void testFindProductByIdOrNameIfNotExist() {
+        expectedException.expect(ProductNotFoundException.class);
+        String searchBy = "eaohe";
+
+        when(productRepository.findByName(searchBy)).thenReturn(Optional.empty());
+
+        productServiceImpl.findProductByIdOrName(searchBy);
+        verify(productRepository, times(1))
+                .findByName(searchBy);
+    }
+
+    @Test
     public void testFindProductById() {
         int index = 2;
         Long id = products.get(index).getId();
@@ -105,7 +123,6 @@ public class ProductServiceImplTest {
         verify(productRepository, times(1)).findById(id);
     }
 
-    //TODO: add testFindProductByIdOrNameIfNotExist
     //TODO: add testFindProductByIdIfNotExist
     //TODO: add testFindProductByNameIfNotExist
 
