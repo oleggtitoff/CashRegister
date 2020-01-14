@@ -3,7 +3,7 @@ package ua.training.cashregister.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.training.cashregister.dto.CheckEntryDTO;
+import ua.training.cashregister.dto.CheckEntriesDTO;
 import ua.training.cashregister.entity.Check;
 import ua.training.cashregister.entity.CheckEntry;
 import ua.training.cashregister.repository.CheckEntryRepository;
@@ -27,9 +27,9 @@ public class CheckEntryService {
         }
     }
 
-    public CheckEntryDTO findProductsByCheck(Check check) {
+    public CheckEntriesDTO findProductsByCheck(Check check) {
         //TODO: checking for an empty list
-        return new CheckEntryDTO(checkEntryRepository.findByCheck(check));
+        return new CheckEntriesDTO(checkEntryRepository.findByCheck(check));
     }
 
     public void deleteProductInCheck(CheckEntry checkEntry) {

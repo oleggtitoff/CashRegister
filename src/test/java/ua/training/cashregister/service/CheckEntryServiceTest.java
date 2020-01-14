@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import ua.training.cashregister.dto.CheckEntryDTO;
+import ua.training.cashregister.dto.CheckEntriesDTO;
 import ua.training.cashregister.entity.Check;
 import ua.training.cashregister.entity.CheckEntry;
 import ua.training.cashregister.repository.CheckEntryRepository;
@@ -26,11 +26,11 @@ public class CheckEntryServiceTest {
     @InjectMocks
     CheckEntryService checkEntryService;
     Check check;
-    CheckEntryDTO productsInCheck;
+    CheckEntriesDTO productsInCheck;
 
     @Before
     public void initCheckAndProductsInCheck() {
-        productsInCheck = CheckEntryDTO.builder()
+        productsInCheck = CheckEntriesDTO.builder()
                 .checkEntries(Arrays.asList(
                         CheckEntry.builder()
                                 .id(1L)
@@ -70,7 +70,7 @@ public class CheckEntryServiceTest {
                 Arrays.asList(productsInCheck.getCheckEntries().get(0),
                         productsInCheck.getCheckEntries().get(1)));
 
-        CheckEntryDTO products = checkEntryService.findProductsByCheck(check);
+        CheckEntriesDTO products = checkEntryService.findProductsByCheck(check);
 
         Assert.assertEquals(2, products.getCheckEntries().size());
         Assert.assertEquals(productsInCheck.getCheckEntries().get(0).getId(),

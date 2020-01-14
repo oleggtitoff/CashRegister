@@ -10,10 +10,10 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @ToString
-public class CheckEntryDTO {
+public class CheckEntriesDTO {
     private List<CheckEntry> checkEntries;
 
-    public void addCheckEntry(CheckEntry newProduct) {
-        this.checkEntries.add(newProduct);
+    public void addCheckEntry(CheckEntry checkEntry) {
+        this.checkEntries.add(checkEntry);
     }
 }
