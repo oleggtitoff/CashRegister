@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ua.training.cashregister.entity.ProductType;
 import ua.training.cashregister.exceptions.ProductNotFoundException;
 import ua.training.cashregister.dto.CheckEntriesDTO;
 import ua.training.cashregister.dto.CheckEntryCreationDTO;
@@ -46,12 +47,20 @@ public class CashierPagesController {
         try {
             Product product = productService
                     .findProductByIdOrName(checkEntryCreationDTO.getSearchBy());
+            CheckEntry checkEntry = CheckEntry.builder()
+                    .product(product) .build();
 
+            if (product.getProductType().equals(ProductType.PIECE)) {
+                checkEntry.setQuantity(checkEntryCreationDTO.getNumber().toBigInteger());
+            } else {
+                checkEntry.setMass(checkEntryCreationDTO.getNumber());
+            }
+
+            checkEntriesDTO.addCheckEntry(checkEntry);
         } catch (ProductNotFoundException ex) {
             //TODO: message to user
         }
 
-        checkEntriesDTO.addCheckEntry(new CheckEntry());
         model.addAttribute("entries", checkEntriesDTO);
         return "cashier/new-check";
     }
