@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import ua.training.cashregister.ProductNotFoundException;
+import ua.training.cashregister.exceptions.ProductNotFoundException;
 import ua.training.cashregister.entity.Product;
 import ua.training.cashregister.entity.ProductType;
 import ua.training.cashregister.repository.ProductRepository;
@@ -99,7 +99,7 @@ public class ProductServiceImplTest {
     @Test
     public void testFindProductByIdOrNameIfNotExist() {
         expectedException.expect(ProductNotFoundException.class);
-        String searchBy = "eaohe";
+        String searchBy = "Meat";
 
         when(productRepository.findByName(searchBy)).thenReturn(Optional.empty());
 
