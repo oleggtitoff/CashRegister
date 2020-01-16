@@ -54,7 +54,8 @@ public class AdminPagesController {
     }
 
     @GetMapping({"/statistics", "/statistics/index"})
-    public String getStatisticsIndexPage() {
+    public String getStatisticsIndexPage(Model model) {
+        model.addAttribute("checks", checkService.getReportX());
         return "admin/statistics/index";
     }
 

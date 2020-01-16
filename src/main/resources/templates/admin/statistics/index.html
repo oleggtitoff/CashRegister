@@ -8,14 +8,40 @@
 <br>
 <a class="btn btn-lg" th:href="@{/admin/index}" th:text="#{link.home}">Home</a>
 |
-<a class="btn btn-lg" th:href="@{/admin/statistics/report/x}" th:text="#{link.report.x}">X report</a>
+<a class="btn btn-lg" th:href="@{/admin/statistics/report/x}" th:text="#{link.report.x}">X
+    report</a>
 |
-<a class="btn btn-lg" th:href="@{/admin/statistics/report/z}" th:text="#{link.report.z}">Z report</a>
+<a class="btn btn-lg" th:href="@{/admin/statistics/report/z}" th:text="#{link.report.z}">Z
+    report</a>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header" th:text="#{title.admin.statistics.page}">Admin statistics page</h1>
+            <h1 class="page-header" th:text="#{title.admin.statistics.page}">Admin statistics
+                page</h1>
+
+            <div>
+                <table class="table" th:object="${checks}">
+                    <thead>
+                    <tr>
+                        <th th:text="#{label.id}">Id</th>
+                        <th th:text="#{label.created}">Created</th>
+                        <th th:text="#{label.total.cost}">Total cost</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${checks.isEmpty()}">
+                        <td th:text="#{message.no.products.yet}">No products yet</td>
+                    </tr>
+                    <tr th:each="checkDTO : ${checks}">
+                        <td th:text="${checkDTO.getCheck().id}">id</td>
+                        <td th:text="${checkDTO.getCheck().created}">created</td>
+                        <td th:text="${#numbers.formatDecimal(checkDTO.cost,1,2,'COMMA')}">price
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
