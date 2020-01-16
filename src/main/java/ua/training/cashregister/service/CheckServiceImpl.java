@@ -43,6 +43,15 @@ public class CheckServiceImpl implements CheckService {
         }
     }
 
+    public void deleteCheck(Check check) {
+        try {
+            checkRepository.delete(check);
+        } catch (Exception ex) {
+            //TODO: exception to endpoint
+            log.warn("{Cannot delete!}");
+        }
+    }
+
     //TODO: test method
     public List<CheckWithCostDTO> getReportX() {
         return getAllNotFiscalMemoryChecks().stream()
