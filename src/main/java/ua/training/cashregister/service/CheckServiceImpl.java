@@ -52,6 +52,19 @@ public class CheckServiceImpl implements CheckService {
         }
     }
 
+    public List<CheckWithCostDTO> getReportZ() {
+        List<CheckWithCostDTO> checksWithCost = getReportX();
+
+        List<Check> checks = checksWithCost.stream()
+                .map(check -> {
+                    check.getCheck().setIsInFiscalMemory(true);
+                    return check.getCheck();
+                }).collect(Collectors.toList());
+
+        checkRepository.saveAll(checks);
+        return checksWithCost;
+    }
+
     //TODO: test method
     public List<CheckWithCostDTO> getReportX() {
         return getAllNotFiscalMemoryChecks().stream()
@@ -86,5 +99,4 @@ public class CheckServiceImpl implements CheckService {
     }
 
     //TODO: alterCheck
-    //TODO: deleteCheck
 }

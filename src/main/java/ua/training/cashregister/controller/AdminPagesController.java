@@ -59,8 +59,14 @@ public class AdminPagesController {
     }
 
     @GetMapping("/statistics/report/x")
-    public String getStatisticsReportPage(Model model) {
+    public String getStatisticsReportPageX(Model model) {
         model.addAttribute("checks", checkService.getReportX());
+        return "admin/statistics/report";
+    }
+
+    @GetMapping("/statistics/report/z")
+    public String getStatisticsReportPageZ(Model model) {
+        model.addAttribute("checks", checkService.getReportZ());
         return "admin/statistics/report";
     }
 
