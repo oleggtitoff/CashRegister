@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ua.training.cashregister.entity.Product;
+import ua.training.cashregister.service.CheckService;
 import ua.training.cashregister.service.ProductService;
 
 import javax.validation.Valid;
@@ -17,10 +18,13 @@ import javax.validation.Valid;
 @RequestMapping("/admin")
 public class AdminPagesController {
     private ProductService productService;
+    private CheckService checkService;
 
     @Autowired
-    public AdminPagesController(ProductService productService) {
+    public AdminPagesController(ProductService productService,
+                                CheckService checkService) {
         this.productService = productService;
+        this.checkService = checkService;
     }
 
     @GetMapping({"/", "/index"})
@@ -54,8 +58,9 @@ public class AdminPagesController {
         return "admin/statistics/index";
     }
 
-    @GetMapping("/statistics/report")
-    public String getStatisticsReportPage() {
+    @GetMapping("/statistics/report/x")
+    public String getStatisticsReportPage(Model model) {
+        model.addAttribute("checks", checkService.getAllNotFiscalMemoryChecks());
         return "admin/statistics/report";
     }
 

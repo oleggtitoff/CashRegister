@@ -9,6 +9,7 @@ import ua.training.cashregister.repository.CheckEntryRepository;
 import ua.training.cashregister.repository.CheckRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -41,6 +42,11 @@ public class CheckServiceImpl implements CheckService {
         }
     }
 
-    //TODO: getAllNotFiscalMemoryChecks
+    //TODO: test method
+    public List<Check> getAllNotFiscalMemoryChecks() {
+        return checkRepository.findAllByIsInFiscalMemoryFalse();
+    }
+
+    //TODO: alterCheck
     //TODO: deleteCheck
 }
