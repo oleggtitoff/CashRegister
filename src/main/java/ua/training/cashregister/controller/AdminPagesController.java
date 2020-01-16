@@ -60,7 +60,7 @@ public class AdminPagesController {
 
     @GetMapping("/statistics/report/x")
     public String getStatisticsReportPage(Model model) {
-        model.addAttribute("checks", checkService.getAllNotFiscalMemoryChecks());
+        model.addAttribute("checks", checkService.getReportX());
         return "admin/statistics/report";
     }
 

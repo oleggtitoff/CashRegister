@@ -4,10 +4,35 @@
 <body>
 <th:block th:insert="fragments/language :: language"/>
 
+<a class="btn btn-lg" th:href="@{/admin/statistics/index}" th:text="#{link.back}">Back</a>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header" th:text="#{title.admin.report.page}">Admin report page</h1>
+            <h1 class="page-header" th:text="#{title.report}">Report</h1>
+
+            <div>
+                <table class="table" th:object="${checks}">
+                    <thead>
+                    <tr>
+                        <th th:text="#{label.id}">Id</th>
+                        <th th:text="#{label.created}">Created</th>
+                        <th th:text="#{label.total.cost}">Total cost</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${checks.isEmpty()}">
+                        <td th:text="#{message.no.products.yet}">No products yet</td>
+                    </tr>
+                    <tr th:each="checkDTO : ${checks}">
+                        <td th:text="${checkDTO.getCheck().id}">id</td>
+                        <td th:text="${checkDTO.getCheck().created}">created</td>
+                        <td th:text="${#numbers.formatDecimal(checkDTO.cost,1,2,'COMMA')}">price
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
