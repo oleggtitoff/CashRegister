@@ -2,13 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:insert="fragments/head :: head"/>
 <body>
-
-<a class="btn btn-lg" th:href="@{/login}">Login</a>
+<a class="btn btn-lg" th:href="@{/login}" th:text="#{link.login}">Login</a>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header">Cash Register start page</h1>
+            <h1 class="page-header" th:text="#{title.start.page}">Cash Register start page</h1>
         </div>
     </div>
 </div>
