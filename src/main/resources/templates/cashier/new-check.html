@@ -47,12 +47,12 @@
         <div>
             <label for="search" th:text="#{label.id.or.name}">Id or name</label>
             <input class="form-control" type="text" id="search" th:field="*{searchBy}"
-                   placeholder="id or name"/>
+                   th:placeholder="#{placeholder.id.or.name}"/>
         </div>
         <div>
             <label for="number" th:text="#{label.quantity.or.mass}">Quantity or mass</label>
             <input class="form-control" type="text" id="number" th:field="*{number}"
-                   placeholder="quantity or mass"/>
+                   th:placeholder="#{placeholder.quantity.or.mass}"/>
         </div>
         <div>
             <button class="btn btn-default" type="submit" name="add" th:text="#{button.add.product}">Add product</button>
