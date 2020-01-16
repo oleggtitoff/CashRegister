@@ -5,21 +5,20 @@
 
 <a class="btn btn-lg" th:href="@{/logout}">Logout</a>
 <br>
-<a class="btn btn-lg" th:href="@{/cashier/index}">User home</a>
+<a class="btn btn-lg" th:href="@{/cashier/index}">Home</a>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header">User new-check page</h1>
+            <h1 class="page-header">New check</h1>
         </div>
     </div>
 
     <table class="table" th:object="${entries}">
         <thead>
         <tr>
-            <th>#</th>
-            <th>Product id</th>
-            <th>Product name</th>
+            <th>Id</th>
+            <th>Name</th>
             <th>Quantity</th>
             <th>Mass</th>
         </tr>
@@ -45,7 +44,7 @@
     </table>
     <form th:action="@{/cashier/new-check}" th:object="${entry}" method="post">
         <div>
-            <label for="search">Product id or name</label>
+            <label for="search">Id or name</label>
             <input class="form-control" type="text" id="search" th:field="*{searchBy}"
                    placeholder="id or name"/>
         </div>

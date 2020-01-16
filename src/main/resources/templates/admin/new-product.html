@@ -5,12 +5,12 @@
 
 <a class="btn btn-lg" th:href="@{/logout}">Logout</a>
 <br>
-<a class="btn btn-lg" th:href="@{/admin/index}">Admin home</a>
+<a class="btn btn-lg" th:href="@{/admin/index}">Home</a>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header">Admin new-product page</h1>
+            <h1 class="page-header">New product</h1>
 
             <form action="#" th:action="@{/admin/new-product}" th:object="${product}" method="post">
                 <div class="form-group">
@@ -31,12 +31,12 @@
                         <li class="list-group-item">
                             <input type="radio" id="radioQuantity" onclick="handleClick()"
                                    th:field="*{productType}" th:value="PIECE" required/>
-                            <label for="radioQuantity" th:text="Piece">Label 1</label>
+                            <label for="radioQuantity" th:text="Piece">Piece</label>
                         </li>
                         <li class="list-group-item">
                             <input type="radio" id="radioMass" onclick="handleClick()"
                                    th:field="*{productType}" th:value="BULK"/>
-                            <label for="radioMass" th:text="Bulk">Label 2</label>
+                            <label for="radioMass" th:text="Bulk">Bulk</label>
                         </li>
                     </ul>
                 </div>
@@ -54,7 +54,7 @@
 
                 <div>
                     <br>
-                    <button class="btn btn-default" type="submit">Submit</button>
+                    <button class="btn btn-default" type="submit">Save</button>
                 </div>
 
                 <script>

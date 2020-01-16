@@ -31,6 +31,7 @@ public class CheckServiceImpl implements CheckService {
 
         checkEntriesDTO.getCheckEntries()
                 .forEach(check::addCheckEntry);
+
         try {
             checkRepository.save(check);
             checkEntryRepository.saveAll(checkEntriesDTO.getCheckEntries());
