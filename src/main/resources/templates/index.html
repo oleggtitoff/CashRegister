@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:insert="fragments/head :: head"/>
 <body>
+<th:block th:insert="fragments/language :: language"/>
 <a class="btn btn-lg" th:href="@{/login}" th:text="#{link.login}">Login</a>
 
 <div class="container">
