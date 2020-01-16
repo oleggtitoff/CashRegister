@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:insert="fragments/head :: head"/>
-
 <body>
+<th:block th:insert="fragments/language :: language"/>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header">Admin report page</h1>
+            <h1 class="page-header" th:text="#{title.admin.report.page}">Admin report page</h1>
         </div>
     </div>
 </div>
