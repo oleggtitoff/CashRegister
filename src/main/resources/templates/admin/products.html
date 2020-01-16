@@ -2,31 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:insert="fragments/head :: head"/>
 <body>
+<th:block th:insert="fragments/language :: language"/>
 
-<a class="btn btn-lg" th:href="@{/logout}">Logout</a>
+<a class="btn btn-lg" th:href="@{/logout}" th:text="#{link.logout}">Logout</a>
 <br>
-<a class="btn btn-lg" th:href="@{/admin/index}">Home</a>
+<a class="btn btn-lg" th:href="@{/admin/index}" th:text="#{link.home}">Home</a>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header">All products</h1>
+            <h1 class="page-header" th:text="#{title.all.products}">All products</h1>
 
             <div>
                 <table class="table" th:object="${products}">
                     <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Type</th>
-                        <th>Total quantity</th>
-                        <th>Total mass</th>
+                        <th th:text="#{label.id}">Id</th>
+                        <th th:text="#{label.name}">Name</th>
+                        <th th:text="#{label.price}">Price</th>
+                        <th th:text="#{label.type}">Type</th>
+                        <th th:text="#{label.total.quantity}">Total quantity</th>
+                        <th th:text="#{label.total.mass}">Total mass</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:if="${products.isEmpty()}">
-                        <td>No products yet</td>
+                        <td th:text="#{message.no.products.yet}">No products yet</td>
                     </tr>
                     <tr th:each="product : ${products}">
                         <td th:text="${product.id}">id</td>
