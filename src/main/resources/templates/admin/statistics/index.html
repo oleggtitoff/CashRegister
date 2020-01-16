@@ -2,15 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:insert="fragments/head :: head"/>
 <body>
+<th:block th:insert="fragments/language :: language"/>
 
-<a class="btn btn-lg" th:href="@{/logout}">Logout</a>
+<a class="btn btn-lg" th:href="@{/logout}" th:text="#{link.logout}">Logout</a>
 <br>
-<a class="btn btn-lg" th:href="@{/admin/index}">Admin home</a>
+<a class="btn btn-lg" th:href="@{/admin/index}" th:text="#{link.home}">Home</a>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header">Admin statistics page</h1>
+            <h1 class="page-header" th:text="#{title.admin.statistics.page}">Admin statistics page</h1>
         </div>
     </div>
 </div>
