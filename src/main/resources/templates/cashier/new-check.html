@@ -2,30 +2,31 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:insert="fragments/head :: head"/>
 <body>
+<th:block th:insert="fragments/language :: language"/>
 
-<a class="btn btn-lg" th:href="@{/logout}">Logout</a>
+<a class="btn btn-lg" th:href="@{/logout}" th:text="#{link.logout}">Logout</a>
 <br>
-<a class="btn btn-lg" th:href="@{/cashier/index}">Home</a>
+<a class="btn btn-lg" th:href="@{/cashier/index}" th:text="#{link.home}">Home</a>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header">New check</h1>
+            <h1 class="page-header" th:text="#{title.new.check}">New check</h1>
         </div>
     </div>
 
     <table class="table" th:object="${entries}">
         <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Mass</th>
+            <th th:text="#{label.id}">Id</th>
+            <th th:text="#{label.name}">Name</th>
+            <th th:text="#{label.quantity}">Quantity</th>
+            <th th:text="#{label.mass}">Mass</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="*{checkEntries.isEmpty()}">
-            <td>No products yet</td>
+            <td th:text="#{message.no.products.yet}">No products yet</td>
         </tr>
         <tr th:each="entry,entryStat : *{checkEntries}">
             <td th:text="${entryStat.count}">1</td>
@@ -44,21 +45,21 @@
     </table>
     <form th:action="@{/cashier/new-check}" th:object="${entry}" method="post">
         <div>
-            <label for="search">Id or name</label>
+            <label for="search" th:text="#{label.id.or.name}">Id or name</label>
             <input class="form-control" type="text" id="search" th:field="*{searchBy}"
                    placeholder="id or name"/>
         </div>
         <div>
-            <label for="number">Quantity or mass</label>
+            <label for="number" th:text="#{label.quantity.or.mass}">Quantity or mass</label>
             <input class="form-control" type="text" id="number" th:field="*{number}"
                    placeholder="quantity or mass"/>
         </div>
         <div>
-            <button class="btn btn-default" type="submit" name="add">Add product</button>
+            <button class="btn btn-default" type="submit" name="add" th:text="#{button.add.product}">Add product</button>
         </div>
         <br>
         <div>
-            <button class="btn btn-default" type="submit" name="submit">Save check</button>
+            <button class="btn btn-default" type="submit" name="submit" th:text="#{button.save.check}">Save check</button>
         </div>
     </form>
 </div>
