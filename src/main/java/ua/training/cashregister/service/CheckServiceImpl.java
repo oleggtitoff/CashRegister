@@ -8,7 +8,6 @@ import ua.training.cashregister.dto.CheckWithCostDTO;
 import ua.training.cashregister.entity.Check;
 import ua.training.cashregister.entity.CheckEntry;
 import ua.training.cashregister.entity.ProductType;
-import ua.training.cashregister.repository.CheckEntryRepository;
 import ua.training.cashregister.repository.CheckRepository;
 
 import java.math.BigDecimal;
@@ -20,27 +19,24 @@ import java.util.stream.Collectors;
 @Service
 public class CheckServiceImpl implements CheckService {
     private final CheckRepository checkRepository;
-    private final CheckEntryRepository checkEntryRepository;
 
     @Autowired
-    public CheckServiceImpl(CheckRepository checkRepository,
-                            CheckEntryRepository checkEntryRepository) {
+    public CheckServiceImpl(CheckRepository checkRepository) {
         this.checkRepository = checkRepository;
-        this.checkEntryRepository = checkEntryRepository;
     }
 
     //TODO: test method
     public void saveNewCheck(CheckEntriesDTO checkEntriesDTO) {
         Check check = Check.builder()
                 .created(LocalDateTime.now())
+                .checkEntries(checkEntriesDTO.getCheckEntries())
                 .build();
 
-        checkEntriesDTO.getCheckEntries()
-                .forEach(check::addCheckEntry);
+        check.getCheckEntries()
+                .forEach(e -> e.setCheck(check));
 
         try {
             checkRepository.save(check);
-            checkEntryRepository.saveAll(checkEntriesDTO.getCheckEntries());
         } catch (Exception ex) {
             //TODO: exception to endpoint
             log.warn("{Cannot save!}");

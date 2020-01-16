@@ -22,7 +22,8 @@ public class CheckEntry {
     @ManyToOne
     private Product product;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "check_id")
     private Check check;
 
     @Builder.Default

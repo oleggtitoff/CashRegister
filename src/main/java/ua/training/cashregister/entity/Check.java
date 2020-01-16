@@ -31,8 +31,8 @@ public class Check {
     private Boolean isInFiscalMemory = false;
 
     @Builder.Default
-    @OneToMany(mappedBy = "check", cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "check",
+            cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CheckEntry> checkEntries = new ArrayList<>();
 
     public void addCheckEntry(CheckEntry checkEntry) {

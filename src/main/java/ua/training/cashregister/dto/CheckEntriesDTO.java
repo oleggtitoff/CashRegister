@@ -18,4 +18,8 @@ public class CheckEntriesDTO {
     public void addCheckEntry(CheckEntry checkEntry) {
         this.checkEntries.add(checkEntry);
     }
+
+    public void clear() {
+        checkEntries.clear();
+    }
 }

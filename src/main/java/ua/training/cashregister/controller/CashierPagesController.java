@@ -70,9 +70,12 @@ public class CashierPagesController {
     }
 
     @RequestMapping(value = "/new-check", params = {"submit"})
-    public String saveCheck(@ModelAttribute("entries") CheckEntriesDTO checkEntriesDTO) {
+    public String saveCheck(Model model) {
+        //TODO: if check is empty
         checkService.saveNewCheck(checkEntriesDTO);
-        checkEntriesDTO.getCheckEntries().clear();
-        return "cashier/index";
+        checkEntriesDTO.clear();
+        model.addAttribute("entries", checkEntriesDTO);
+        model.addAttribute("entry", new CheckEntryCreationDTO());
+        return "cashier/new-check";
     }
 }
