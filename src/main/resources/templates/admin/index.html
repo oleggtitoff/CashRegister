@@ -2,19 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:insert="fragments/head :: head"/>
 <body>
+<th:block th:insert="fragments/language :: language"/>
 
-<a class="btn btn-lg" th:href="@{/logout}">Logout</a>
+<a class="btn btn-lg" th:href="@{/logout}" th:text="#{link.logout}">Logout</a>
 <br>
-<a class="btn btn-lg" th:href="@{/admin/products}">Products</a>
+<a class="btn btn-lg" th:href="@{/admin/products}" th:text="#{link.products}">Products</a>
 |
-<a class="btn btn-lg" th:href="@{/admin/new-product}">New product</a>
+<a class="btn btn-lg" th:href="@{/admin/new-product}" th:text="#{link.new.product}">New product</a>
 |
-<a class="btn btn-lg" th:href="@{/admin/statistics/index}">Statistics</a>
+<a class="btn btn-lg" th:href="@{/admin/statistics/index}" th:text="#{link.statistics}">Statistics</a>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header">Admin main page</h1>
+            <h1 class="page-header" th:text="#{title.admin.main.page}">Admin main page</h1>
         </div>
     </div>
 </div>
