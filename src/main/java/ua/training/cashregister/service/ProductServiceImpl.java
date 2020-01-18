@@ -35,6 +35,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public Product findProductByIdOrName(String searchBy) {
+        //TODO: hardcode
         long id = -1L;
 
         try {
