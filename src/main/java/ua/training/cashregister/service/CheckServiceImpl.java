@@ -68,13 +68,15 @@ public class CheckServiceImpl implements CheckService {
     //TODO: test method
     public List<CheckWithCostDTO> getReportX() {
         return getAllNotFiscalMemoryChecks().stream()
-                .map(check -> {
-                    //TODO: refactor
-                    CheckWithCostDTO obj = new CheckWithCostDTO();
-                    obj.setCheck(check);
-                    obj.setCost(countTotalCost(check));
-                    return obj;
-                }).collect(Collectors.toList());
+                .map(this::getCheckWithCostDTO)
+                .collect(Collectors.toList());
+    }
+
+    private CheckWithCostDTO getCheckWithCostDTO(Check check) {
+        return CheckWithCostDTO.builder()
+                .check(check)
+                .cost(countTotalCost(check))
+                .build();
     }
 
     //TODO: test method
