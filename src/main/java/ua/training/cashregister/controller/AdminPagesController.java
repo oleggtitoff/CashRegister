@@ -59,6 +59,12 @@ public class AdminPagesController {
         return "admin/statistics/index";
     }
 
+    @PostMapping(value = {"/statistics", "/statistics/index"}, params = {"delete"})
+    public String deleteCheck(@Valid @ModelAttribute("id") Long id, Model model) {
+        model.addAttribute("checks", checkService.deleteCheckByIdAndGetReportX(id));
+        return "admin/statistics/index";
+    }
+
     @GetMapping("/statistics/report/x")
     public String getStatisticsReportPageX(Model model) {
         model.addAttribute("checks", checkService.getReportX());

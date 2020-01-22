@@ -43,9 +43,19 @@ public class CheckServiceImpl implements CheckService {
         }
     }
 
-    public void deleteCheck(Check check) {
+    public Check findCheckById(Long id) {
+        //TODO: throw exception if empty
+        return checkRepository.findById(id).get();
+    }
+
+    public List<CheckWithCostDTO> deleteCheckByIdAndGetReportX(Long id) {
+        deleteCheckById(id);
+        return getReportX();
+    }
+
+    private void deleteCheckById(Long id) {
         try {
-            checkRepository.delete(check);
+            checkRepository.deleteById(id);
         } catch (Exception ex) {
             //TODO: exception to endpoint
             log.warn("{Cannot delete!}");
@@ -83,7 +93,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     //TODO: test method
-    public BigDecimal countTotalCost(Check check) {
+    private BigDecimal countTotalCost(Check check) {
         return check.getCheckEntries()
                 .stream()
                 .map(this::countEntryCost)
@@ -92,7 +102,7 @@ public class CheckServiceImpl implements CheckService {
 
     //TODO: refactor
     //TODO: test method
-    public BigDecimal countEntryCost(CheckEntry checkEntry) {
+    private BigDecimal countEntryCost(CheckEntry checkEntry) {
         if (checkEntry.getProduct().getProductType() == ProductType.PIECE) {
             return checkEntry.getProduct().getPrice().multiply(new BigDecimal(checkEntry.getQuantity()));
         } else {
@@ -101,7 +111,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     //TODO: test method
-    public List<Check> getAllNotFiscalMemoryChecks() {
+    private List<Check> getAllNotFiscalMemoryChecks() {
         return checkRepository.findAllByIsInFiscalMemoryFalse();
     }
 

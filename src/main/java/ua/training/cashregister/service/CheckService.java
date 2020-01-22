@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface CheckService {
     void saveNewCheck(CheckEntriesDTO checkEntriesDTO);
-    void deleteCheck(Check check);
+    Check findCheckById(Long id);
     List<CheckWithCostDTO> getReportX();
     List<CheckWithCostDTO> getReportZ();
+    List<CheckWithCostDTO> deleteCheckByIdAndGetReportX(Long id);
 }

@@ -38,6 +38,15 @@
                         <td th:text="${checkDTO.getCheck().created}">created</td>
                         <td th:text="${#numbers.formatDecimal(checkDTO.cost,1,2,'COMMA')}">price
                         </td>
+                        <td>
+                            <form th:action="@{/admin/statistics/index}" method="post">
+                                <input type="hidden" name="id"
+                                       th:value="${checkDTO.getCheck().id}"/>
+                                <button class="btn btn-default" type="submit" name="delete">Delete
+                                    check
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
