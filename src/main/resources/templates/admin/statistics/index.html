@@ -42,6 +42,9 @@
                             <form th:action="@{/admin/statistics/index}" method="post">
                                 <input type="hidden" name="id"
                                        th:value="${checkDTO.getCheck().id}"/>
+                                <button class="btn btn-default" type="submit" name="open">Open
+                                    check
+                                </button>
                                 <button class="btn btn-default" type="submit" name="delete">Delete
                                     check
                                 </button>

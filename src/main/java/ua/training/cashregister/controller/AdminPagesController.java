@@ -59,10 +59,16 @@ public class AdminPagesController {
         return "admin/statistics/index";
     }
 
-    @PostMapping(value = {"/statistics", "/statistics/index"}, params = {"delete"})
+    @PostMapping(value = "/statistics/index", params = {"delete"})
     public String deleteCheck(@Valid @ModelAttribute("id") Long id, Model model) {
         model.addAttribute("checks", checkService.deleteCheckByIdAndGetReportX(id));
         return "admin/statistics/index";
+    }
+
+    @PostMapping(value = "/statistics/index", params = {"open"})
+    public String openCheck(@Valid @ModelAttribute("id") Long id, Model model) {
+        model.addAttribute("check", checkService.findCheckById(id));
+        return "admin/statistics/check";
     }
 
     @GetMapping("/statistics/report/x")

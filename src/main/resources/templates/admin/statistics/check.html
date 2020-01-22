@@ -8,6 +8,41 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header" th:text="#{title.admin.check.page}">Admin check page</h1>
+
+            <div>
+                <table class="table" th:object="${check}">
+                    <thead>
+                    <tr>
+                        <th th:text="#{label.id}">Id</th>
+                        <th th:text="#{label.name}">Name</th>
+                        <th th:text="#{label.price}">Price</th>
+                        <th th:text="#{label.type}">Type</th>
+                        <th th:text="#{label.quantity}">Quantity</th>
+                        <th th:text="#{label.mass}">Mass</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${check.getCheckEntries().isEmpty()}">
+                        <td th:text="#{message.no.products.yet}">No products yet</td>
+                    </tr>
+                    <tr th:each="checkEntry : ${check.getCheckEntries()}">
+                        <td th:text="${checkEntry.getProduct().id}">id</td>
+                        <td th:text="${checkEntry.getProduct().name}">name</td>
+                        <td th:text="${#numbers.formatDecimal(checkEntry.getProduct().price,0,2,'COMMA')}">price
+                        </td>
+                        <td th:text="${checkEntry.getProduct().productType}">type</td>
+                        <td th:if="${checkEntry.getProduct().productType == checkEntry.getProduct().productType.PIECE}"
+                            th:text="${#numbers.formatInteger(checkEntry.quantity,0)}">quantity
+                        </td>
+                        <td th:unless="${checkEntry.getProduct().productType == checkEntry.getProduct().productType.PIECE}">-</td>
+                        <td th:if="${checkEntry.getProduct().productType == checkEntry.getProduct().productType.BULK}"
+                            th:text="${#numbers.formatDecimal(checkEntry.mass,0,3,'COMMA')}">mass
+                        </td>
+                        <td th:unless="${checkEntry.getProduct().productType == checkEntry.getProduct().productType.BULK}">-</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
