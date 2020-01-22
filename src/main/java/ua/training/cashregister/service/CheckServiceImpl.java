@@ -52,6 +52,8 @@ public class CheckServiceImpl implements CheckService {
         }
     }
 
+    //TODO: refactor
+    //TODO: test method
     public List<CheckWithCostDTO> getReportZ() {
         List<CheckWithCostDTO> checksWithCost = getReportX();
 
@@ -72,6 +74,7 @@ public class CheckServiceImpl implements CheckService {
                 .collect(Collectors.toList());
     }
 
+    //TODO: test method
     private CheckWithCostDTO getCheckWithCostDTO(Check check) {
         return CheckWithCostDTO.builder()
                 .check(check)
@@ -87,6 +90,7 @@ public class CheckServiceImpl implements CheckService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
+    //TODO: refactor
     //TODO: test method
     public BigDecimal countEntryCost(CheckEntry checkEntry) {
         if (checkEntry.getProduct().getProductType() == ProductType.PIECE) {

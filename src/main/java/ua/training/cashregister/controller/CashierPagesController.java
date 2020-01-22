@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ua.training.cashregister.entity.ProductType;
 import ua.training.cashregister.exceptions.ProductNotFoundException;
@@ -44,7 +45,7 @@ public class CashierPagesController {
         return "cashier/new-check";
     }
 
-    @RequestMapping(value = "/new-check", params = {"add"})
+    @PostMapping(value = "/new-check", params = {"add"})
     public String addEntry(@Valid @ModelAttribute("entry") CheckEntryCreationDTO checkEntryCreationDTO,
                            BindingResult bindingResult,
                            Model model) {
@@ -52,7 +53,7 @@ public class CashierPagesController {
             Product product = productService
                     .findProductByIdOrName(checkEntryCreationDTO.getSearchBy());
             CheckEntry checkEntry = CheckEntry.builder()
-                    .product(product) .build();
+                    .product(product).build();
 
             if (product.getProductType().equals(ProductType.PIECE)) {
                 checkEntry.setQuantity(checkEntryCreationDTO.getNumber().toBigInteger());
@@ -65,17 +66,14 @@ public class CashierPagesController {
             //TODO: message to user
         }
 
-        model.addAttribute("entries", checkEntriesDTO);
-        return "cashier/new-check";
+        return getNewCheckPage(model);
     }
 
-    @RequestMapping(value = "/new-check", params = {"submit"})
+    @PostMapping(value = "/new-check", params = {"submit"})
     public String saveCheck(Model model) {
         //TODO: if check is empty
         checkService.saveNewCheck(checkEntriesDTO);
         checkEntriesDTO.clear();
-        model.addAttribute("entries", checkEntriesDTO);
-        model.addAttribute("entry", new CheckEntryCreationDTO());
-        return "cashier/new-check";
+        return getNewCheckPage(model);
     }
 }
