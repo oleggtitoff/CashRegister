@@ -82,9 +82,4 @@ public class AdminPagesController {
         model.addAttribute("checks", checkService.getReportZ());
         return "admin/statistics/report";
     }
-
-    @GetMapping("/statistics/check")
-    public String getStatisticsCheckPage() {
-        return "admin/statistics/check";
-    }
 }
